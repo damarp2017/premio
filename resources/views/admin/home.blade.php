@@ -48,7 +48,7 @@
                                 <i class="mdi mdi-account-outline"></i>
                             </div>
                             <div class="m-l-10 align-self-center">
-                                <h3 class="m-b-0 font-light">5</h3>
+                                <h3 class="m-b-0 font-light">{{ $total['admin'] }}</h3>
                                 <h5 class="text-muted m-b-0">Administrator</h5></div>
                         </div>
                     </div>
@@ -63,7 +63,7 @@
                             <i class="mdi mdi-account-outline"></i>
                         </div>
                         <div class="m-l-10 align-self-center">
-                            <h3 class="m-b-0 font-lgiht">20</h3>
+                            <h3 class="m-b-0 font-lgiht">{{ $total['lecturer'] }}</h3>
                             <h5 class="text-muted m-b-0">Lecturers</h5>
                         </div>
                     </div>
@@ -78,7 +78,7 @@
                             <i class="mdi mdi-account-outline"></i>
                         </div>
                         <div class="m-l-10 align-self-center">
-                            <h3 class="m-b-0 font-lgiht">689</h3>
+                            <h3 class="m-b-0 font-lgiht">{{ $total['student'] }}</h3>
                             <h5 class="text-muted m-b-0">Students</h5>
                         </div>
                     </div>

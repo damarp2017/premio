@@ -23,7 +23,12 @@ class AdminController extends Controller
      */
     public function index()
     {
-        return view('admin.home');
+        $total = [
+            'admin' => count(Admin::all()),
+            'lecturer' => count(Lecturer::all()),
+            'student' => count(User::all()),
+        ];
+        return view('admin.home', compact('total'));
     }
 
     public function viewUserAdmin()
