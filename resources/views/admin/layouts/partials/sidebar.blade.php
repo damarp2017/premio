@@ -53,7 +53,7 @@
                         <span class="hide-menu">Student </span>
                     </a>
                     <ul aria-expanded="false" class="collapse">
-                        <li><a href="#">Student</a></li>
+                        <li><a href="{{ route('admin.student') }}">Student</a></li>
                     </ul>
                 </li>
                 <li>

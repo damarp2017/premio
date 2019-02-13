@@ -49,6 +49,12 @@ class AdminController extends Controller
         return view('admin.users.student.student', compact('students'));
     }
 
+    public function viewStudent()
+    {
+        $students = User::all();
+        return view('admin.student.student', compact('students'));
+    }
+
     /**
      * Show the form for creating a new resource.
      *

@@ -2,28 +2,25 @@
 /**
  * Created by PhpStorm.
  * User: DamarPermadany
- * Date: 2/5/2019
- * Time: 10:29 AM
+ * Date: 2/7/2019
+ * Time: 9:19 AM
  */
 ?>
 @extends('admin.layouts.app')
 
 @section('title')
-    {{ __('User Administrator') }}
+    {{ __('Student') }}
 @endsection
 
 @section('content')
     <div class="row page-titles">
         <div class="col-md-5 col-8 align-self-center">
-            <h3 class="text-themecolor m-b-0 m-t-0">Admin Users</h3>
+            <h3 class="text-themecolor m-b-0 m-t-0">Student</h3>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item">
                     <b><a href="{{ route('premio') }}" class=" text-danger">Premio</a></b>
                 </li>
-                <li class="breadcrumb-item">
-                    <b>Users</b>
-                </li>
-                <li class="breadcrumb-item active">Administrator</li>
+                <li class="breadcrumb-item active">Student</li>
             </ol>
         </div>
         <div class="col-md-7 col-4 align-self-center">
@@ -57,15 +54,16 @@
                             <thead>
                             <tr>
                                 <th>No</th>
-                                <th>No</th>
+                                <th>NIM</th>
                                 <th>Image</th>
                                 <th>Name</th>
                                 <th>Email</th>
+                                <th>Detail</th>
                             </tr>
                             </thead>
                             <tbody>
                             @php
-                            $number = 1;
+                                $number = 1;
                             @endphp
 
                             @foreach($students as $student)
@@ -79,6 +77,7 @@
                                     </td>
                                     <td>{{ $student->name }}</td>
                                     <td>{{ $student->email }}</td>
+                                    <td><a href="#" data-toggle="tooltip" data-original-title="Click for more details">More Details</a></td>
                                 </tr>
                             @endforeach
                             </tbody>
@@ -140,3 +139,4 @@
         });
     </script>
 @endsection
+
