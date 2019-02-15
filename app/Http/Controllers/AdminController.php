@@ -55,6 +55,12 @@ class AdminController extends Controller
         return view('admin.student.student', compact('students'));
     }
 
+    public function viewStudentDetail($id)
+    {
+        $student = User::find($id);
+        return view('admin.student.detail-student', compact('student'));
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -192,6 +198,27 @@ class AdminController extends Controller
         }
         $lecturer->update();
         return redirect()->route('admin.user-lecturer')->with(['success' => 'Chosen lecturer updated successfully']);
+    }
+
+    public function updateStudent(Request $request, $id)
+    {
+        $student = User::where('id', $id)->first();
+        if ($request->image != null) {
+            Storage::delete($student->image);
+            $image = $request->file('image')->store('users');
+            $student->image = $image;
+        }
+        $student->nim = $request->nim;
+        $student->name = $request->name;
+        $student->place_of_birth = $request->place_of_birth;
+        $student->date_of_birth = $request->date_of_birth;
+        $student->gender = $request->gender;
+        $student->blood_type = $request->blood_type;
+        $student->email = $request->email;
+        $student->religion = $request->religion;
+        $student->phone = $request->phone;
+        $student->update();
+        return redirect()->route('admin.student-detail', $id)->with(['success' => 'Chosen student updated successfully']);
     }
 
     /**

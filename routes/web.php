@@ -49,6 +49,8 @@ Route::prefix('/admin')->group(function () {
 
     // Student menu routes
     Route::get('/student', 'AdminController@viewStudent')->name('admin.student');
+    Route::get('/student/{student}', 'AdminController@viewStudentDetail')->name('admin.student-detail');
+    Route::patch('/student/{student}', 'AdminController@updateStudent')->name('admin.update-student');
 
     // Password reset routes
     Route::post('/password/email', 'Auth\AdminForgotPasswordController@sendResetLinkEmail')->name('admin.password.email');

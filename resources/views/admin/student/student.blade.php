@@ -77,7 +77,7 @@
                                     </td>
                                     <td>{{ $student->name }}</td>
                                     <td>{{ $student->email }}</td>
-                                    <td><a href="#" data-toggle="tooltip" data-original-title="Click for more details">More Details</a></td>
+                                    <td><a href="{{ route('admin.student-detail', $student->id) }}" data-toggle="tooltip" data-original-title="Click for more details">More Details</a></td>
                                 </tr>
                             @endforeach
                             </tbody>
