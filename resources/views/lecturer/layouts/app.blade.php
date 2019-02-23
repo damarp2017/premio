@@ -32,7 +32,9 @@
     @include('lecturer.layouts.partials.header')
     @include('lecturer.layouts.partials.sidebar')
     <div class="page-wrapper">
-        @yield('content')
+        <div class="container-fluid">
+            @yield('content')
+        </div>
         @include('lecturer.layouts.partials.footer')
     </div>
 </div>

@@ -30,6 +30,23 @@
             </ol>
         </div>
     </div>
+    @if (count($errors) > 0)
+        <div class="row">
+            <div class="col-md-12">
+                <div class="alert alert-warning">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h3 class="text-danger"><i class="fa fa-exclamation-triangle"></i> Warning</h3>
+                    <ul class="list-group">
+                        @foreach ($errors->all() as $error)
+                            <li class="list-group-item list-group-item-danger">{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            </div>
+        </div>
+    @endif
     @if($message = Session::get('success'))
         <div class="row">
             <div class="col-md-12">
@@ -184,9 +201,53 @@
                                         </div>
                                     </div>
                                     <div class="form-actions">
-                                        <button type="submit" class="btn btn-outline-warning"><i class="fa fa-check"></i> Save Changes</button>
+                                        <button type="submit" class="btn btn-warning"><i class="fa fa-check"></i> Save Changes</button>
+                                        <a href="#" class="btn btn-outline-danger pull-right" data-toggle="modal"
+                                           data-target="#deleteModal{{$student->id}}">
+                                            <i class="ti-close"></i>
+                                            &ensp;Remove this record
+                                        </a>
                                     </div>
                                 </form>
+                                <div class="modal fade" id="deleteModal{{$student->id}}" tabindex="-1"
+                                     role="dialog" aria-labelledby="exampleModalLabel1">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h4 class="modal-title text-danger" id="exampleModalLabel1">
+                                                    <b>WARNING !!!</b>
+                                                </h4>
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form action="{{ route('admin.destroy-user-student', $student->id) }}"
+                                                      method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <p>
+                                                        Are you sure to remove "<b class="text-danger">{{ $student->name }}</b>"
+                                                        ?
+                                                    </p>
+                                                    <div class="modal-footer">
+                                                        <button type="button"
+                                                                class="btn btn-outline-success btn-sm"
+                                                                data-dismiss="modal">
+                                                            <i class="fa fa-close"></i>&ensp;No, go back
+                                                        </button>
+                                                        <button type="submit"
+                                                                class="btn btn-outline-danger btn-sm">
+                                                            <i class="fa fa-check"></i>&ensp;Yes, remove this
+                                                            record
+                                                        </button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -195,6 +256,7 @@
         </div>
     </div>
 @endsection
+
 @section('this-page-script')
     <script src="{{ asset('material-pro/assets/plugins/moment/moment.js') }}"></script>
     <script src="{{ asset('material-pro/assets/plugins/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js') }}"></script>
@@ -211,86 +273,8 @@
             weekStart: 0,
             time: false
         });
-        $('#timepicker').bootstrapMaterialDatePicker({
-            format: 'HH:mm',
-            time: true,
-            date: false
-        });
-        $('#date-format').bootstrapMaterialDatePicker({
-            format: 'dddd DD MMMM YYYY - HH:mm'
-        });
 
-        $('#min-date').bootstrapMaterialDatePicker({
-            format: 'DD/MM/YYYY HH:mm',
-            minDate: new Date()
-        });
-        // Clock pickers
-        $('#single-input').clockpicker({
-            placement: 'bottom',
-            align: 'left',
-            autoclose: true,
-            'default': 'now'
-        });
-        $('.clockpicker').clockpicker({
-            donetext: 'Done',
-        }).find('input').change(function () {
-            console.log(this.value);
-        });
-        $('#check-minutes').click(function (e) {
-            // Have to stop propagation here
-            e.stopPropagation();
-            input.clockpicker('show').clockpicker('toggleView', 'minutes');
-        });
-        if (/mobile/i.test(navigator.userAgent)) {
-            $('input').prop('readOnly', true);
-        }
-        // Colorpicker
-        $(".colorpicker").asColorPicker();
-        $(".complex-colorpicker").asColorPicker({
-            mode: 'complex'
-        });
-        $(".gradient-colorpicker").asColorPicker({
-            mode: 'gradient'
-        });
-        // Date Picker
-        jQuery('.mydatepicker, #datepicker').datepicker();
-        jQuery('#datepicker-autoclose').datepicker({
-            autoclose: true,
-            todayHighlight: true
-        });
-        jQuery('#date-range').datepicker({
-            toggleActive: true
-        });
-        jQuery('#datepicker-inline').datepicker({
-            todayHighlight: true
-        });
-        // Daterange picker
-        $('.input-daterange-datepicker').daterangepicker({
-            buttonClasses: ['btn', 'btn-sm'],
-            applyClass: 'btn-danger',
-            cancelClass: 'btn-inverse'
-        });
-        $('.input-daterange-timepicker').daterangepicker({
-            timePicker: true,
-            format: 'MM/DD/YYYY h:mm A',
-            timePickerIncrement: 30,
-            timePicker12Hour: true,
-            timePickerSeconds: false,
-            buttonClasses: ['btn', 'btn-sm'],
-            applyClass: 'btn-danger',
-            cancelClass: 'btn-inverse'
-        });
-        $('.input-limit-datepicker').daterangepicker({
-            format: 'MM/DD/YYYY',
-            minDate: '06/01/2015',
-            maxDate: '06/30/2015',
-            buttonClasses: ['btn', 'btn-sm'],
-            applyClass: 'btn-danger',
-            cancelClass: 'btn-inverse',
-            dateLimit: {
-                days: 6
-            }
-        });
+
     </script>
     <script src="{{ asset('material-pro/assets/plugins/dropify/dist/js/dropify.min.js') }}"></script>
     <script>

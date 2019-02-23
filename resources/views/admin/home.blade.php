@@ -20,10 +20,8 @@
 @endsection
 
 @section('this-page-scripts')
-    <!-- Magnific popup JavaScript -->
     <script src="{{ asset('material-pro/assets/plugins/Magnific-Popup-master/dist/jquery.magnific-popup.min.js') }}"></script>
     <script src="{{ asset('material-pro/assets/plugins/Magnific-Popup-master/dist/jquery.magnific-popup-init.js') }}"></script>
-    <!-- ============================================================== -->
 @endsection
 
 @section('content')

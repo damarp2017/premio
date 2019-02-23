@@ -25,6 +25,8 @@ Route::prefix('/admin')->group(function () {
     Route::post('/login', 'Auth\AdminLoginController@login')->name('admin.login.submit');
     Route::get('/', 'AdminController@index')->name('admin.home');
     Route::get('/logout', 'Auth\AdminLoginController@logout')->name('admin.logout');
+    Route::get('/my-profile', 'AdminController@myprofile')->name('admin.my-profile');
+    Route::patch('/my-profile/{admin}', 'AdminController@updateMyProfile')->name('admin.update-my-profile');
 
     // User-admin menu routes
     Route::get('/user-admin', 'AdminController@viewUserAdmin')->name('admin.user-admin');
@@ -46,11 +48,12 @@ Route::prefix('/admin')->group(function () {
     Route::get('/user-student', 'AdminController@viewUserStudent')->name('admin.user-student');
     Route::get('/create-user-student', 'AdminController@createStudent')->name('admin.create-user-student');
     Route::post('/store-user-student', 'AdminController@storeStudent')->name('admin.store-user-student');
-
+    Route::delete('/user-student/{student}', 'AdminController@destroyStudent')->name('admin.destroy-user-student');
     // Student menu routes
     Route::get('/student', 'AdminController@viewStudent')->name('admin.student');
     Route::get('/student/{student}', 'AdminController@viewStudentDetail')->name('admin.student-detail');
     Route::patch('/student/{student}', 'AdminController@updateStudent')->name('admin.update-student');
+
 
     // Password reset routes
     Route::post('/password/email', 'Auth\AdminForgotPasswordController@sendResetLinkEmail')->name('admin.password.email');

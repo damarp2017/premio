@@ -33,6 +33,24 @@
         </div>
     </div>
 
+    @if (count($errors) > 0)
+        <div class="row">
+            <div class="col-md-12">
+                <div class="alert alert-warning">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h3 class="text-danger"><i class="fa fa-exclamation-triangle"></i> Warning</h3>
+                    <ul class="list-group">
+                        @foreach ($errors->all() as $error)
+                            <li class="list-group-item list-group-item-danger">{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            </div>
+        </div>
+    @endif
+
     <div class="row">
         <div class="col-lg-12">
             <div class="card card-outline-warning">

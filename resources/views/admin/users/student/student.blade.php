@@ -52,6 +52,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
+                    <small class="text-warning pull-right">*you can see details or edit or remove this record by click NIM or Name</small>
                     <div class="table-responsive m-t-0">
                         <table id="myTable" class="table table-bordered table-striped">
                             <thead>
@@ -71,13 +72,17 @@
                             @foreach($students as $student)
                                 <tr>
                                     <td>{{ $number++ }}</td>
-                                    <td>{{ $student->nim }}</td>
+                                    <td><a href="{{ route('admin.student-detail', $student->id) }}" data-toggle="tooltip"
+                                           data-original-title="Click for more details">{{ $student->nim }}</a></td>
                                     <td>
                                         <center>
-                                            <img src="{{ asset('images/'. $student->image) }}" alt="student-user" height="40">
+                                            <img src="{{ asset('images/'. $student->image) }}" alt="student-user"
+                                                 height="40">
                                         </center>
                                     </td>
-                                    <td>{{ $student->name }}</td>
+                                    <td><a href="{{ route('admin.student-detail', $student->id) }}"
+                                           data-toggle="tooltip"
+                                           data-original-title="Click for more details">{{ $student->name }}</a></td>
                                     <td>{{ $student->email }}</td>
                                 </tr>
                             @endforeach

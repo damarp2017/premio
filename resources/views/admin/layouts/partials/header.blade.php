@@ -9,7 +9,7 @@
 <header class="topbar">
     <nav class="navbar top-navbar navbar-expand-md navbar-light">
         <div class="navbar-header">
-            <a class="navbar-brand" href="{{ route('admin.home') }}">
+            <a class="navbar-brand" href="{{ route('premio') }}">
                 <b>
                     <img src="{{ asset('material-pro/assets/images/logo-icon.png') }}" alt="homepage" class="dark-logo"/>
                     <img src="{{ asset('material-pro/assets/images/premio-light-icon.png') }}" alt="homepage" class="light-logo"/>
@@ -53,7 +53,7 @@
                             </li>
                             <li role="separator" class="divider"></li>
                             <li>
-                                <a href="#"><i class="ti-user"></i> My Profile</a>
+                                <a href="{{ route('admin.my-profile') }}"><i class="ti-user"></i> My Profile</a>
                             </li>
                             <li role="separator" class="divider"></li>
                             <li>

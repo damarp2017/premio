@@ -15,6 +15,34 @@ class AdminController extends Controller
         $this->middleware('auth:admin');
     }
 
+    public function myprofile()
+    {
+        return view('admin.profile');
+    }
+
+    public function updateMyProfile(Request $request, $id)
+    {
+        $this->validate($request, [
+            'name' => 'required|min:5',
+            'email' => "required|email|unique:admins,email,$id",
+            'password' => '',
+            'image' => 'max:2048|mimes:jpeg,png,jpeg'
+        ]);
+        $admin = Admin::where('id', $id)->first();
+        $admin->name = $request->name;
+        $admin->email = $request->email;
+        if ($request->password != null) {
+            $admin->password = bcrypt($request->password);
+        }
+        if ($request->image != null) {
+            Storage::delete($admin->image);
+            $image = $request->file('image')->store('admins');
+            $admin->image = $image;
+        }
+        $admin->update();
+        return redirect()->route('admin.my-profile')->with(['success' => 'Your profile updated successfully']);
+    }
+
 
     /**
      * Display a listing of the resource.
@@ -84,11 +112,17 @@ class AdminController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
+        $this->validate($request, [
+            'name' => 'required|min:5',
+            'email' => 'required|email|unique:admins',
+            'password' => 'required|min:6',
+            'image' => 'required|max:2048|mimes:jpg,png,jpeg'
+        ]);
         $admin = new Admin();
         $admin->name = $request->name;
         $admin->email = $request->email;
@@ -101,6 +135,13 @@ class AdminController extends Controller
 
     public function storeLecturer(Request $request)
     {
+        $this->validate($request, [
+            'nipy' => 'required|unique:lecturers|numeric|min:8',
+            'name' => 'required|min:5',
+            'email' => 'required|email|unique:lecturers',
+            'password' => 'required|min:6',
+            'image' => 'required|max:2048|mimes:jpg,png,jpeg',
+        ]);
         $lecturer = new Lecturer();
         $lecturer->nipy = $request->nipy;
         $lecturer->name = $request->name;
@@ -114,6 +155,14 @@ class AdminController extends Controller
 
     public function storeStudent(Request $request)
     {
+        $this->validate($request, [
+            'nim' => 'required|unique:users|numeric|min:8',
+            'name' => 'required|min:5',
+            'email' => 'required|email|unique:users',
+            'gender' => 'required',
+            'phone' => 'required|numeric',
+            'image' => 'required|max:2048|mimes:jpg,png,jpeg',
+        ]);
         $student = new User();
         $student->nim = $request->nim;
         $student->name = $request->name;
@@ -130,7 +179,7 @@ class AdminController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Admin  $admin
+     * @param  \App\Admin $admin
      * @return \Illuminate\Http\Response
      */
     public function show(Admin $admin)
@@ -141,7 +190,7 @@ class AdminController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Admin  $admin
+     * @param  \App\Admin $admin
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -159,31 +208,42 @@ class AdminController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Admin  $admin
+     * @param  \Illuminate\Http\Request $request
+     * @param  \App\Admin $admin
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
+        $this->validate($request, [
+            'name' => 'required|min:5',
+            'email' => "required|email|unique:admins,email,$id",
+            'password' => '',
+            'image' => 'max:2048|mimes:jpeg,png,jpeg'
+        ]);
         $admin = Admin::where('id', $id)->first();
         $admin->name = $request->name;
         $admin->email = $request->email;
-        if ($request->password != null){
+        if ($request->password != null) {
             $admin->password = bcrypt($request->password);
         }
-        if ($request->image != null){
+        if ($request->image != null) {
             Storage::delete($admin->image);
             $image = $request->file('image')->store('admins');
             $admin->image = $image;
         }
-
-        // dd($admin);
         $admin->update();
         return redirect()->route('admin.user-admin')->with(['success' => 'Chosen administrator updated successfully']);
     }
 
     public function updateLecturer(Request $request, $id)
     {
+        $this->validate($request, [
+            'nipy' => "required|numeric|min:8|unique:lecturers,nipy,$id",
+            'name' => 'required|min:5',
+            'email' => "required|email|unique:lecturers,email,$id",
+            'password' => '',
+            'image' => 'max:2048|mimes:jpeg,png,jpeg'
+        ]);
         $lecturer = Lecturer::where('id', $id)->first();
         $lecturer->nipy = $request->nipy;
         $lecturer->name = $request->name;
@@ -202,6 +262,18 @@ class AdminController extends Controller
 
     public function updateStudent(Request $request, $id)
     {
+        $this->validate($request, [
+            'nim' => "required|unique:users,nim,$id|numeric|min:8",
+            'name' => 'required|min:5',
+            'email' => "required|email|unique:users,email,$id",
+            'gender' => 'required',
+            'blood_type' => '',
+            'place_of_birth' => '',
+            'date_of_birth' => '',
+            'religion' => '',
+            'phone' => 'required|numeric',
+            'image' => 'max:2048|mimes:jpg,png,jpeg',
+        ]);
         $student = User::where('id', $id)->first();
         if ($request->image != null) {
             Storage::delete($student->image);
@@ -224,7 +296,7 @@ class AdminController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Admin  $admin
+     * @param  \App\Admin $admin
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
@@ -253,5 +325,19 @@ class AdminController extends Controller
          *
          * */
         return redirect()->route('admin.user-lecturer')->with(['success' => 'Chosen lecturer deleted successfully']);
+    }
+
+    public function destroyStudent($id)
+    {
+        $student = User::find($id);
+        $student->delete();
+        /*
+         *
+         if ($student->delete()) {
+            Storage::delete($student->image);
+        }
+         *
+         * */
+        return redirect()->route('admin.student')->with(['success' => 'Chosen student deleted successfully']);
     }
 }

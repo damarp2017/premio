@@ -33,6 +33,24 @@
         </div>
     </div>
 
+    @if (count($errors) > 0)
+        <div class="row">
+            <div class="col-md-12">
+                <div class="alert alert-warning">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h3 class="text-danger"><i class="fa fa-exclamation-triangle"></i> Warning</h3>
+                    <ul class="list-group">
+                        @foreach ($errors->all() as $error)
+                            <li class="list-group-item list-group-item-danger">{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            </div>
+        </div>
+    @endif
+
     <div class="row">
         <div class="col-lg-12">
             <div class="card card-outline-info">
@@ -46,14 +64,14 @@
                             <div class="row">
                                 <div class="col-md-12 m-b-20">
                                     <label for="image">Image</label>
-                                    <input name="image" required type="file" id="image" class="dropify" data-max-file-size="1M"/>
+                                    <input name="image" required type="file" id="image" class="dropify" data-max-file-size="2M"/>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label class="control-label" for="name">Name</label>
-                                        <input name="name" required type="text" id="name" class="form-control" placeholder="Enter Name">
+                                        <input name="name" required type="text" id="name" class="form-control" placeholder="Enter Name" minlength="5" maxlength="50">
                                     </div>
                                 </div>
                             </div>
@@ -67,7 +85,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="control-label" for="email">Email</label>
-                                        <input name="email" required type="email" id="email" class="form-control" placeholder="Example@website.com">
+                                        <input name="email" required type="email" id="email" class="form-control" placeholder="Example@website.com" maxlength="50">
                                     </div>
                                 </div>
                             </div>
@@ -85,7 +103,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="control-label" for="phone">Phone</label>
-                                        <input name="phone" required type="text" id="phone" class="form-control" placeholder="Enter phone">
+                                        <input name="phone" required type="text" id="phone" class="form-control" placeholder="Enter phone" maxlength="15">
                                     </div>
                                 </div>
                             </div>
