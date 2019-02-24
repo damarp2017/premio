@@ -53,7 +53,7 @@
                             </li>
                             <li role="separator" class="divider"></li>
                             <li>
-                                <a href="#"><i class="ti-user"></i> My Profile</a>
+                                <a href="{{ route('lecturer.my-profile') }}"><i class="ti-user"></i> My Profile</a>
                             </li>
                             <li role="separator" class="divider"></li>
                             <li>

@@ -67,6 +67,12 @@ Route::prefix('/lecturer')->group(function () {
     Route::post('/login', 'Auth\LecturerLoginController@login')->name('lecturer.login.submit');
     Route::get('/', 'LecturerController@index')->name('lecturer.home');
     Route::get('/logout', 'Auth\LecturerLoginController@logout')->name('lecturer.logout');
+    Route::get('/my-profile', 'LecturerController@myProfile')->name('lecturer.my-profile');
+    Route::patch('/my-profile/{lecturer}', 'LecturerController@updateMyProfile')->name('lecturer.update-my-profile');
+
+    // Student menu routes
+    Route::get('/student', 'LecturerController@student')->name('lecturer.student');
+    Route::get('/student/{student}', 'LecturerController@studentDetail')->name('lecturer.student-detail');
 
     // Password reset routes
     Route::post('/password/email', 'Auth\LecturerForgotPasswordController@sendResetLinkEmail')->name('lecturer.password.email');

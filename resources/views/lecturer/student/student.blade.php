@@ -2,51 +2,28 @@
 /**
  * Created by PhpStorm.
  * User: DamarPermadany
- * Date: 2/5/2019
- * Time: 10:29 AM
+ * Date: 2/24/2019
+ * Time: 6:07 AM
  */
 ?>
-@extends('admin.layouts.app')
+@extends('lecturer.layouts.app')
 
 @section('title')
-    {{ __('User Administrator') }}
+    {{ __('Student') }}
 @endsection
 
 @section('content')
     <div class="row page-titles">
         <div class="col-md-5 col-8 align-self-center">
-            <h3 class="text-themecolor m-b-0 m-t-0">Student Users</h3>
+            <h3 class="text-themecolor m-b-0 m-t-0">Student</h3>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item">
                     <b><a href="{{ route('premio') }}" class=" text-danger">Premio</a></b>
                 </li>
-                <li class="breadcrumb-item">
-                    <b>Users</b>
-                </li>
                 <li class="breadcrumb-item active">Student</li>
             </ol>
         </div>
-        <div class="col-md-7 col-4 align-self-center">
-            <div class="d-flex m-t-10 justify-content-end">
-                <a href="{{ route('admin.create-user-student') }}" class="btn btn-outline-info btn-sm">
-                    <i class="ti-plus"></i>&ensp;Create New</a>
-            </div>
-        </div>
     </div>
-
-    @if($message = Session::get('success'))
-        <div class="row">
-            <div class="col-md-12">
-                <div class="alert alert-success">
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                    <h3 class="text-success"><i class="fa fa-check-circle"></i> Success</h3>
-                    {{ $message }}
-                </div>
-            </div>
-        </div>
-    @endif
 
     <div class="row">
         <div class="col-12">
@@ -58,7 +35,7 @@
                             <thead>
                             <tr>
                                 <th>No</th>
-                                <th>No</th>
+                                <th>NIM</th>
                                 <th>Image</th>
                                 <th>Name</th>
                                 <th>Email</th>
@@ -66,13 +43,13 @@
                             </thead>
                             <tbody>
                             @php
-                            $number = 1;
+                                $number = 1;
                             @endphp
 
                             @foreach($students as $student)
                                 <tr>
                                     <td>{{ $number++ }}</td>
-                                    <td><a href="{{ route('admin.student-detail', $student->id) }}" data-toggle="tooltip"
+                                    <td><a href="{{ route('lecturer.student-detail', $student->id) }}" data-toggle="tooltip"
                                            data-original-title="Click for more details">{{ $student->nim }}</a></td>
                                     <td>
                                         <center>
@@ -80,7 +57,7 @@
                                                  height="40">
                                         </center>
                                     </td>
-                                    <td><a href="{{ route('admin.student-detail', $student->id) }}"
+                                    <td><a href="{{ route('lecturer.student-detail', $student->id) }}"
                                            data-toggle="tooltip"
                                            data-original-title="Click for more details">{{ $student->name }}</a></td>
                                     <td>{{ $student->email }}</td>
@@ -145,3 +122,4 @@
         });
     </script>
 @endsection
+

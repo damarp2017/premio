@@ -24,7 +24,7 @@
             <h3 class="text-themecolor m-b-0 m-t-0">Home</h3>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{ route('premio') }}">Premio</a></li>
-                <li class="breadcrumb-item active">Dashboard</li>
+                <li class="breadcrumb-item active">Home</li>
             </ol>
         </div>
     </div>
