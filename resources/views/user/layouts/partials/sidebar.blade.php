@@ -17,7 +17,7 @@
                 <a href="#" class="dropdown-toggle u-dropdown" data-toggle="dropdown" role="button"
                    aria-haspopup="true" aria-expanded="true">{{ Auth::user()->name }}</a>
                 <div class="dropdown-menu animated flipInY">
-                    <a href="#" class="dropdown-item"><i class="ti-user"></i> My Profile</a>
+                    <a href="{{ route('my-profile') }}" class="dropdown-item"><i class="ti-user"></i> My Profile</a>
                     <div class="dropdown-divider"></div>
                     <a href="{{ route('users.logout') }}" class="dropdown-item">
                         <i class="fa fa-power-off"></i> Logout
