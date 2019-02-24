@@ -268,13 +268,10 @@
     <script src="{{ asset('material-pro/assets/plugins/timepicker/bootstrap-timepicker.min.js') }}"></script>
     <script src="{{ asset('material-pro/assets/plugins/bootstrap-daterangepicker/daterangepicker.js') }}"></script>
     <script>
-        // MAterial Date picker
         $('#mdate').bootstrapMaterialDatePicker({
             weekStart: 0,
             time: false
         });
-
-
     </script>
     <script src="{{ asset('material-pro/assets/plugins/dropify/dist/js/dropify.min.js') }}"></script>
     <script>

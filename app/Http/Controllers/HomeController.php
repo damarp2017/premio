@@ -25,4 +25,9 @@ class HomeController extends Controller
     {
         return view('user.home');
     }
+
+    public function myAchievement()
+    {
+        return view('user.my-achievement.my-achievement');
+    }
 }
