@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Achievement;
 use App\Lecturer;
 use App\User;
 use Illuminate\Http\Request;
@@ -46,7 +47,8 @@ class LecturerController extends Controller
 
     public function index()
     {
-        return view('lecturer.home');
+        $achievements = Achievement::orderBy('created_at', 'DESC')->paginate(3);
+        return view('lecturer.home', compact('achievements'));
     }
 
     public function student()

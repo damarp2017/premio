@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Achievement;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class HomeController extends Controller
@@ -25,12 +27,15 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('user.home');
+        $achievements = Achievement::orderBy('created_at', 'DESC')->paginate(3);
+        return view('user.home', compact('achievements'));
     }
 
     public function myAchievement()
     {
-        return view('user.my-achievement.my-achievement');
+        $achievements = Achievement::where('nim', Auth::user()->nim)->get();
+        return view('user.my-achievement.my-achievement', compact('achievements'));
+
     }
 
     public function myProfile()
@@ -72,5 +77,30 @@ class HomeController extends Controller
         $student->phone = $request->phone;
         $student->update();
         return redirect()->route('my-profile')->with(['success' => 'Your profile updated successfully']);
+    }
+
+    public function storeMyAchievement(Request $request)
+    {
+        $this->validate($request, [
+            'team_name' => 'required',
+            'achievement' => 'required',
+            'prize' => 'required|numeric',
+            'competition' => 'required',
+            'place_of_competition' => 'required',
+            'date_of_competition' => 'required',
+            'image' => 'required'
+        ]);
+        $achievement = new Achievement();
+        $achievement->nim = Auth::user()->nim;
+        $achievement->team_name = $request->team_name;
+        $achievement->achievement = $request->achievement;
+        $achievement->prize = $request->prize;
+        $achievement->competition = $request->competition;
+        $achievement->place_of_competition = $request->place_of_competition;
+        $achievement->date_of_competition = $request->date_of_competition;
+        $image = $request->file('image')->store('achievements');
+        $achievement->certificate = $image;
+        $achievement->save();
+        return redirect()->route('my-achievement')->with(['success' => 'New achievement uploaded successfully']);
     }
 }

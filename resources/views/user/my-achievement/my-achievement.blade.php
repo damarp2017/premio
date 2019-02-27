@@ -37,126 +37,59 @@
             </ol>
         </div>
     </div>
+    @if (count($errors) > 0)
+        <div class="row">
+            <div class="col-md-12">
+                <div class="alert alert-warning">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h3 class="text-danger"><i class="fa fa-exclamation-triangle"></i> Warning</h3>
+                    <ul class="list-group">
+                        @foreach ($errors->all() as $error)
+                            <li class="list-group-item list-group-item-danger">{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            </div>
+        </div>
+    @endif
+    @if($message = Session::get('success'))
+        <div class="row">
+            <div class="col-md-12">
+                <div class="alert alert-success">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h3 class="text-success"><i class="fa fa-check-circle"></i> Success</h3>
+                    {{ $message }}
+                </div>
+            </div>
+        </div>
+    @endif
     <div class="row el-element-overlay">
         <div class="col-md-12">
             <h4 class="card-title">Your Achievements</h4>
         </div>
-        <div class="col-lg-3 col-md-6">
-            <div class="card">
-                <div class="el-card-item">
-                    <div class="el-card-avatar el-overlay-1">
-                        <img src="{{ asset('material-pro/assets/images/users/1.jpg') }}" alt="user"/>
-                        <div class="el-overlay scrl-up">
-                            <ul class="el-info">
-                                <li>
-                                    <a class="btn default btn-outline image-popup-vertical-fit"
-                                       href="{{ asset('material-pro/assets/images/users/1.jpg') }}">
-                                        <i class="icon-magnifier"></i>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="btn default btn-outline" href="javascript:void(0);">
-                                        <i class="icon-link"></i>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
+        @foreach($achievements as $achievement)
+            <div class="col-lg-4 col-md-6">
+                <div class="card">
+                    <img class="card-img-top" src="{{ asset('images/' . $achievement->certificate) }}" alt="Card image cap" height="300">
+                    <div class="card-body">
+                        <h4 class="card-title">{{ $achievement->place_of_competition }}</h4>
+                        <p class="card-text">{{ $achievement->nim }}</p>
+                        <p class="card-text">{{ $achievement->achievement }}</p>
+                        <p class="card-text">{{ $achievement->prize }}</p>
+                        <a href="#" class="btn btn-primary">Go somewhere</a>
                     </div>
-                    <div class="el-card-content">
-                        <h3 class="box-title">Genelia Deshmukh</h3>
-                        <small>Managing Director</small>
-                        <br/>
+                    <div class="card-footer text-muted text-center">
+                        Uploaded at
+                        <br>
+                        <small>{{ \Carbon\Carbon::parse($achievement->created_at)->format('D, d M Y')}}</small>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="col-lg-3 col-md-6">
-            <div class="card">
-                <div class="el-card-item">
-                    <div class="el-card-avatar el-overlay-1">
-                        <img src="{{ asset('material-pro/assets/images/users/2.jpg') }}" alt="user"/>
-                        <div class="el-overlay scrl-up">
-                            <ul class="el-info">
-                                <li>
-                                    <a class="btn default btn-outline image-popup-vertical-fit"
-                                       href="{{ asset('material-pro/assets/images/users/2.jpg') }}">
-                                        <i class="icon-magnifier"></i>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="btn default btn-outline" href="javascript:void(0);">
-                                        <i class="icon-link"></i>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="el-card-content">
-                        <h3 class="box-title">Genelia Deshmukh</h3>
-                        <small>Managing Director</small>
-                        <br/>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-3 col-md-6">
-            <div class="card">
-                <div class="el-card-item">
-                    <div class="el-card-avatar el-overlay-1">
-                        <img src="{{ asset('material-pro/assets/images/users/3.jpg') }}" alt="user"/>
-                        <div class="el-overlay scrl-up">
-                            <ul class="el-info">
-                                <li>
-                                    <a class="btn default btn-outline image-popup-vertical-fit"
-                                       href="{{ asset('material-pro/assets/images/users/3.jpg') }}">
-                                        <i class="icon-magnifier"></i>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="btn default btn-outline" href="javascript:void(0);">
-                                        <i class="icon-link"></i>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="el-card-content">
-                        <h3 class="box-title">Genelia Deshmukh</h3>
-                        <small>Managing Director</small>
-                        <br/>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-3 col-md-6">
-            <div class="card">
-                <div class="el-card-item">
-                    <div class="el-card-avatar el-overlay-1">
-                        <img src="{{ asset('material-pro/assets/images/users/4.jpg') }}" alt="user"/>
-                        <div class="el-overlay scrl-up">
-                            <ul class="el-info">
-                                <li>
-                                    <a class="btn default btn-outline image-popup-vertical-fit"
-                                       href="{{ asset('material-pro/assets/images/users/4.jpg') }}">
-                                        <i class="icon-magnifier"></i>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="btn default btn-outline" href="javascript:void(0);">
-                                        <i class="icon-link"></i>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="el-card-content">
-                        <h3 class="box-title">Genelia Deshmukh</h3>
-                        <small>Managing Director</small>
-                        <br/>
-                    </div>
-                </div>
-            </div>
-        </div>
+        @endforeach
     </div>
     <hr>
     <div class="row">
@@ -168,7 +101,8 @@
                 <div class="card-header">
                 </div>
                 <div class="card-body">
-                    <form action="#" method="post" enctype="multipart/form-data">
+                    <form action="{{ route('store-my-achievement') }}" method="post" enctype="multipart/form-data">
+                        @csrf
                         <div class="form-body">
                             <div class="row">
                                 <div class="col-lg-12 col-md-12">
@@ -209,7 +143,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="control-label">Date</label>
-                                        <input name="date" type="text" required class="form-control"
+                                        <input name="date_of_competition" type="text" required class="form-control"
                                                placeholder="Choose Date" id="mdate">
                                     </div>
                                 </div>

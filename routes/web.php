@@ -19,6 +19,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/my-achievement', 'HomeController@myAchievement')->name('my-achievement');
+Route::post('/my-achievement', 'HomeController@storeMyAchievement')->name('store-my-achievement');
 Route::get('/my-profile', 'HomeController@myProfile')->name('my-profile');
 Route::patch('/my-profile/{student}', 'HomeController@updateMyProfile')->name('update-my-profile');
 Route::get('/users/logout', 'Auth\LoginController@userLogout')->name('users.logout');

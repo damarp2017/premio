@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Achievement;
 use App\Admin;
 use App\Lecturer;
 use App\User;
@@ -56,7 +57,8 @@ class AdminController extends Controller
             'lecturer' => count(Lecturer::all()),
             'student' => count(User::all()),
         ];
-        return view('admin.home', compact('total'));
+        $achievements = Achievement::orderBy('created_at', 'DESC')->paginate(3);
+        return view('admin.home', compact('total', 'achievements'));
     }
 
     public function viewUserAdmin()

@@ -32,117 +32,27 @@
         <div class="col-md-12">
             <h4 class="card-title">Newest Achievements</h4>
         </div>
-        <div class="col-lg-3 col-md-6">
-            <div class="card">
-                <div class="el-card-item">
-                    <div class="el-card-avatar el-overlay-1">
-                        <img src="{{ asset('material-pro/assets/images/users/1.jpg') }}" alt="user" />
-                        <div class="el-overlay scrl-up">
-                            <ul class="el-info">
-                                <li>
-                                    <a class="btn default btn-outline image-popup-vertical-fit" href="{{ asset('material-pro/assets/images/users/1.jpg') }}">
-                                        <i class="icon-magnifier"></i>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="btn default btn-outline" href="javascript:void(0);">
-                                        <i class="icon-link"></i>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
+        @foreach($achievements as $achievement)
+            <div class="col-lg-4 col-md-6">
+                <div class="card">
+                    <img class="card-img-top" src="{{ asset('images/' . $achievement->certificate) }}" alt="Card image cap" height="300">
+                    <div class="card-body">
+                        <h4 class="card-title">{{ $achievement->place_of_competition }}</h4>
+                        <p class="card-text">{{ $achievement->nim }}</p>
+                        <p class="card-text">{{ $achievement->achievement }}</p>
+                        <p class="card-text">{{ $achievement->prize }}</p>
+                        <a href="#" class="btn btn-primary">Go somewhere</a>
                     </div>
-                    <div class="el-card-content">
-                        <h3 class="box-title">Genelia Deshmukh</h3>
-                        <small>Managing Director</small>
-                        <br/>
+                    <div class="card-footer text-muted text-center">
+                        Uploaded at
+                        <br>
+                        <small>{{ \Carbon\Carbon::parse($achievement->created_at)->format('D, d M Y')}}</small>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="col-lg-3 col-md-6">
-            <div class="card">
-                <div class="el-card-item">
-                    <div class="el-card-avatar el-overlay-1">
-                        <img src="{{ asset('material-pro/assets/images/users/2.jpg') }}" alt="user" />
-                        <div class="el-overlay scrl-up">
-                            <ul class="el-info">
-                                <li>
-                                    <a class="btn default btn-outline image-popup-vertical-fit" href="{{ asset('material-pro/assets/images/users/2.jpg') }}">
-                                        <i class="icon-magnifier"></i>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="btn default btn-outline" href="javascript:void(0);">
-                                        <i class="icon-link"></i>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="el-card-content">
-                        <h3 class="box-title">Genelia Deshmukh</h3>
-                        <small>Managing Director</small>
-                        <br/>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-3 col-md-6">
-            <div class="card">
-                <div class="el-card-item">
-                    <div class="el-card-avatar el-overlay-1">
-                        <img src="{{ asset('material-pro/assets/images/users/3.jpg') }}" alt="user" />
-                        <div class="el-overlay scrl-up">
-                            <ul class="el-info">
-                                <li>
-                                    <a class="btn default btn-outline image-popup-vertical-fit" href="{{ asset('material-pro/assets/images/users/3.jpg') }}">
-                                        <i class="icon-magnifier"></i>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="btn default btn-outline" href="javascript:void(0);">
-                                        <i class="icon-link"></i>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="el-card-content">
-                        <h3 class="box-title">Genelia Deshmukh</h3>
-                        <small>Managing Director</small>
-                        <br/>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-3 col-md-6">
-            <div class="card">
-                <div class="el-card-item">
-                    <div class="el-card-avatar el-overlay-1">
-                        <img src="{{ asset('material-pro/assets/images/users/4.jpg') }}" alt="user" />
-                        <div class="el-overlay scrl-up">
-                            <ul class="el-info">
-                                <li>
-                                    <a class="btn default btn-outline image-popup-vertical-fit" href="{{ asset('material-pro/assets/images/users/4.jpg') }}">
-                                        <i class="icon-magnifier"></i>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="btn default btn-outline" href="javascript:void(0);">
-                                        <i class="icon-link"></i>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="el-card-content">
-                        <h3 class="box-title">Genelia Deshmukh</h3>
-                        <small>Managing Director</small>
-                        <br/>
-                    </div>
-                </div>
-            </div>
+        @endforeach
+        <div class="col-md-12">
+            {{ $achievements->links() }}
         </div>
     </div>
 @endsection
