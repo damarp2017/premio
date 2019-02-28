@@ -95,22 +95,36 @@
             <div class="card">
                 <div class="card-body">
                     <ul class="nav nav-tabs" role="tablist">
-                        <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#profile" role="tab"><span class="hidden-sm-up"><i class="ti-home"></i></span> <span class="hidden-xs-down">Profile</span></a> </li>
-                        <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#achievement" role="tab"><span class="hidden-sm-up"><i class="ti-user"></i></span> <span class="hidden-xs-down">Achievement</span></a> </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" data-toggle="tab" href="#profile" role="tab">
+                                <span class="hidden-sm-up">
+                                    <i class="ti-home"></i>
+                                </span>
+                                <span class="hidden-xs-down">Profile</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#achievement" role="tab">
+                                <span class="hidden-sm-up"><i class="ti-user"></i></span>
+                                <span class="hidden-xs-down">Achievement</span>
+                            </a>
+                        </li>
                     </ul>
                     <div class="tab-content tabcontent-border">
                         <div class="tab-pane active" id="profile" role="tabpanel">
                             <div class="p-20">
                                 <div class="col-lg-12">
                                     <div class="card-body">
-                                        <form action="{{ route('admin.update-student', $student->id) }}" method="post" enctype="multipart/form-data">
+                                        <form action="{{ route('admin.update-student', $student->id) }}" method="post"
+                                              enctype="multipart/form-data">
                                             @csrf
                                             @method('PATCH')
                                             <div class="form-body">
                                                 <div class="row">
                                                     <div class="card-body">
                                                         <input data-default-file="{{ asset('images/'.$student->image) }}"
-                                                               type="file" name="image" id="input-file-now" class="dropify"
+                                                               type="file" name="image" id="input-file-now"
+                                                               class="dropify"
                                                                data-max-file-size="1M"/>
                                                     </div>
                                                 </div>
@@ -126,7 +140,8 @@
                                                         <div class="form-group">
                                                             <label class="control-label">Name</label>
                                                             <input name="name" type="text" class="form-control"
-                                                                   placeholder="Enter name" value="{{ $student->name }}">
+                                                                   placeholder="Enter name"
+                                                                   value="{{ $student->name }}">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -134,7 +149,8 @@
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label class="control-label">Place of Birth</label>
-                                                            <input name="place_of_birth" type="text" class="form-control"
+                                                            <input name="place_of_birth" type="text"
+                                                                   class="form-control"
                                                                    placeholder="Enter place of birth"
                                                                    value="{{ $student->place_of_birth }}">
                                                         </div>
@@ -153,9 +169,15 @@
                                                         <div class="form-group">
                                                             <label class="control-label">Gender</label>
                                                             <select class="form-control custom-select" name="gender">
-                                                                <option value="" @if ($student->gender == null) {{ 'selected' }} @endif >-- Select gender --</option>
-                                                                <option value="male" @if ($student->gender == 'male') {{ 'selected' }} @endif >Male</option>
-                                                                <option value="female" @if ($student->gender == 'female') {{ 'selected' }} @endif >Female</option>
+                                                                <option value="" @if ($student->gender == null) {{ 'selected' }} @endif >
+                                                                    -- Select gender --
+                                                                </option>
+                                                                <option value="male" @if ($student->gender == 'male') {{ 'selected' }} @endif >
+                                                                    Male
+                                                                </option>
+                                                                <option value="female" @if ($student->gender == 'female') {{ 'selected' }} @endif >
+                                                                    Female
+                                                                </option>
                                                             </select>
                                                         </div>
                                                     </div>
@@ -164,11 +186,21 @@
                                                             <label class="control-label">Blood Type</label>
                                                             <select name="blood_type" class="form-control custom-select"
                                                                     tabindex="1">
-                                                                <option value="" @if ($student->blood_type == null) {{ 'selected' }} @endif >-- Select blood type --</option>
-                                                                <option value="O" @if ($student->blood_type == 'O') {{ 'selected' }} @endif >O</option>
-                                                                <option value="A" @if ($student->blood_type == 'A') {{ 'selected' }} @endif >A</option>
-                                                                <option value="B" @if ($student->blood_type == 'B') {{ 'selected' }} @endif >B</option>
-                                                                <option value="AB" @if ($student->blood_type == 'AB') {{ 'selected' }} @endif >AB</option>
+                                                                <option value="" @if ($student->blood_type == null) {{ 'selected' }} @endif >
+                                                                    -- Select blood type --
+                                                                </option>
+                                                                <option value="O" @if ($student->blood_type == 'O') {{ 'selected' }} @endif >
+                                                                    O
+                                                                </option>
+                                                                <option value="A" @if ($student->blood_type == 'A') {{ 'selected' }} @endif >
+                                                                    A
+                                                                </option>
+                                                                <option value="B" @if ($student->blood_type == 'B') {{ 'selected' }} @endif >
+                                                                    B
+                                                                </option>
+                                                                <option value="AB" @if ($student->blood_type == 'AB') {{ 'selected' }} @endif >
+                                                                    AB
+                                                                </option>
                                                             </select>
                                                         </div>
                                                     </div>
@@ -178,7 +210,8 @@
                                                         <div class="form-group ">
                                                             <label class="control-label">Email</label>
                                                             <input type="email" name="email" class="form-control"
-                                                                   placeholder="Enter email" value="{{ $student->email }}">
+                                                                   placeholder="Enter email"
+                                                                   value="{{ $student->email }}">
                                                         </div>
                                                     </div>
                                                     <div class="col-md-6">
@@ -186,12 +219,24 @@
                                                             <label class="control-label">Religion</label>
                                                             <select name="religion" class="form-control custom-select"
                                                                     tabindex="1">
-                                                                <option value="" @if ($student->religion == null) {{ 'selected' }} @endif >-- Select religion --</option>
-                                                                <option value="islam" @if ($student->religion == 'islam') {{ 'selected' }} @endif >Islam</option>
-                                                                <option value="katolik" @if ($student->religion == 'katolik') {{ 'selected' }} @endif >Katolik</option>
-                                                                <option value="protestan" @if ($student->religion == 'protestan') {{ 'selected' }} @endif >Protestan</option>
-                                                                <option value="hindu" @if ($student->religion == 'religion') {{ 'selected' }} @endif >Hindu</option>
-                                                                <option value="buddha" @if ($student->religion == 'buddha') {{ 'selected' }} @endif >Budha</option>
+                                                                <option value="" @if ($student->religion == null) {{ 'selected' }} @endif >
+                                                                    -- Select religion --
+                                                                </option>
+                                                                <option value="islam" @if ($student->religion == 'islam') {{ 'selected' }} @endif >
+                                                                    Islam
+                                                                </option>
+                                                                <option value="katolik" @if ($student->religion == 'katolik') {{ 'selected' }} @endif >
+                                                                    Katolik
+                                                                </option>
+                                                                <option value="protestan" @if ($student->religion == 'protestan') {{ 'selected' }} @endif >
+                                                                    Protestan
+                                                                </option>
+                                                                <option value="hindu" @if ($student->religion == 'religion') {{ 'selected' }} @endif >
+                                                                    Hindu
+                                                                </option>
+                                                                <option value="buddha" @if ($student->religion == 'buddha') {{ 'selected' }} @endif >
+                                                                    Budha
+                                                                </option>
                                                             </select>
                                                         </div>
                                                     </div>
@@ -201,14 +246,18 @@
                                                         <div class="form-group">
                                                             <label class="control-label">Phone</label>
                                                             <input type="text" name="phone" class="form-control"
-                                                                   value="{{ $student->phone }}" placeholder="Enter phone">
+                                                                   value="{{ $student->phone }}"
+                                                                   placeholder="Enter phone">
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="form-actions">
-                                                <button type="submit" class="btn btn-warning"><i class="fa fa-check"></i> Save Changes</button>
-                                                <a href="#" class="btn btn-outline-danger pull-right" data-toggle="modal"
+                                                <button type="submit" class="btn btn-warning"><i
+                                                            class="fa fa-check"></i> Save Changes
+                                                </button>
+                                                <a href="#" class="btn btn-outline-danger pull-right"
+                                                   data-toggle="modal"
                                                    data-target="#deleteModal{{$student->id}}">
                                                     <i class="ti-close"></i>
                                                     &ensp;Remove this record
@@ -234,7 +283,8 @@
                                                             @csrf
                                                             @method('DELETE')
                                                             <p>
-                                                                Are you sure to remove "<b class="text-danger">{{ $student->name }}</b>"
+                                                                Are you sure to remove "<b
+                                                                        class="text-danger">{{ $student->name }}</b>"
                                                                 ?
                                                             </p>
                                                             <div class="modal-footer">
@@ -263,11 +313,14 @@
                                 <div class="col-md-12">
                                     <ul class="list-unstyled">
                                         <li class="media">
-                                            <img class="d-flex mr-3" src="{{ asset('images/' . $achievement->certificate) }}" width="60"
+                                            <img class="d-flex mr-3"
+                                                 src="{{ asset('images/' . $achievement->certificate) }}" width="60"
                                                  alt="Achievements">
                                             <div class="media-body">
                                                 <h4 class="mt-0 mb-2 text-danger">{{ \Illuminate\Support\Str::title($achievement->achievement) }}</h4>
-                                                <h6 class="mt-0 mb-2">{{ $achievement->name }} <span class="mdi @if($achievement->gender == 'male') : {{ 'mdi-gender-male text-info' }} @else {{ 'mdi-gender-female text-danger' }} @endif"></span></h6>
+                                                <h6 class="mt-0 mb-2">{{ $achievement->name }} <span
+                                                            class="mdi @if($achievement->gender == 'male') : {{ 'mdi-gender-male text-info' }} @else {{ 'mdi-gender-female text-danger' }} @endif"></span>
+                                                </h6>
                                                 <p class="mt-0 mb-0">
                                                     <small>Team Name : {{ $achievement->team_name }}</small>
                                                 </p>
@@ -278,11 +331,14 @@
                                                     <small>Place : {{ $achievement->place_of_competition }}</small>
                                                 </p>
                                                 <p class="mt-0 mb-0">
-                                                    <small>Rp. {{ number_format($achievement->prize, 0, '.', ',') }}</small>
+                                                    <small>
+                                                        Rp. {{ number_format($achievement->prize, 0, '.', ',') }}</small>
                                                 </p>
                                                 <hr>
                                                 <small class="text-muted mt-0 mb-0">Uploaded at</small>
-                                                <p><small class="text-muted mt-0 mb-0">{{ \Carbon\Carbon::parse($achievement->created_at)->format('l, d F Y')}}</small></p>
+                                                <p>
+                                                    <small class="text-muted mt-0 mb-0">{{ \Carbon\Carbon::parse($achievement->created_at)->format('l, d F Y')}}</small>
+                                                </p>
                                             </div>
                                         </li>
                                     </ul>

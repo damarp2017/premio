@@ -47,7 +47,9 @@ class LecturerController extends Controller
 
     public function index()
     {
-        $achievements = Achievement::orderBy('created_at', 'DESC')->paginate(3);
+        $achievements = Achievement::select('*')->join('users', 'users.nim', '=', 'achievements.nim')
+            ->orderBy('achievements.created_at', 'DESC')
+            ->paginate(3);
         return view('lecturer.home', compact('achievements'));
     }
 
@@ -60,7 +62,19 @@ class LecturerController extends Controller
     public function studentDetail($id)
     {
         $student = User::find($id);
-        return view('lecturer.student.detail-student', compact('student'));
+        $achievements = Achievement::select('*')->join('users', 'users.nim', '=', 'achievements.nim')
+            ->where('users.nim', $student->nim)
+            ->orderBy('achievements.created_at', 'DESC')->get();
+        return view('lecturer.student.detail-student', compact('student', 'achievements'));
+    }
+
+    public function achievement()
+    {
+        $count = count(Achievement::all());
+        $achievements = Achievement::select('*')->join('users', 'users.nim', '=', 'achievements.nim')
+            ->orderBy('achievements.created_at', 'DESC')
+            ->paginate(20);
+        return view('lecturer.achievement.achievement', compact('achievements', 'count'));
     }
 
 }

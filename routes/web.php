@@ -86,6 +86,9 @@ Route::prefix('/lecturer')->group(function () {
     Route::get('/student', 'LecturerController@student')->name('lecturer.student');
     Route::get('/student/{student}', 'LecturerController@studentDetail')->name('lecturer.student-detail');
 
+    // Achievement menu routes
+    Route::get('/achievement', 'LecturerController@achievement')->name('lecturer.achievement');
+
     // Password reset routes
     Route::post('/password/email', 'Auth\LecturerForgotPasswordController@sendResetLinkEmail')->name('lecturer.password.email');
     Route::get('/password/reset', 'Auth\LecturerForgotPasswordController@showLinkRequestForm')->name('lecturer.password.request');

@@ -2,35 +2,31 @@
 /**
  * Created by PhpStorm.
  * User: DamarPermadany
- * Date: 2/2/2019
- * Time: 6:37 PM
+ * Date: 3/1/2019
+ * Time: 6:23 AM
  */
 ?>
-
 @extends('lecturer.layouts.app')
 
 @section('title')
-    Home
-@endsection
-
-@section('this-page-scripts')
-    <script src="{{ asset('material-pro/assets/plugins/Magnific-Popup-master/dist/jquery.magnific-popup.min.js') }}"></script>
-    <script src="{{ asset('material-pro/assets/plugins/Magnific-Popup-master/dist/jquery.magnific-popup-init.js') }}"></script>
+    Achievements
 @endsection
 
 @section('content')
     <div class="row page-titles">
         <div class="col-md-5 col-8 align-self-center">
-            <h3 class="text-themecolor m-b-0 m-t-0">Home</h3>
+            <h3 class="text-themecolor m-b-0 m-t-0">Achievements</h3>
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{ route('premio') }}">Premio</a></li>
-                <li class="breadcrumb-item active">Home</li>
+                <li class="breadcrumb-item">
+                    <b><a href="{{ route('premio') }}" class=" text-danger">Premio</a></b>
+                </li>
+                <li class="breadcrumb-item active">Achievements</li>
             </ol>
         </div>
     </div>
     <div class="row el-element-overlay">
         <div class="col-md-12">
-            <h4 class="card-title">Newest Achievements</h4>
+            <h4 class="card-title">All Achievements ( {{ $count }} )</h4>
         </div>
         @foreach($achievements as $achievement)
             <div class="col-md-4">
