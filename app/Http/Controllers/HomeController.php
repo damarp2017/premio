@@ -27,13 +27,16 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $achievements = Achievement::orderBy('created_at', 'DESC')->paginate(3);
+        $achievements = Achievement::select('*')->join('users', 'users.nim', '=', 'achievements.nim')
+            ->orderBy('achievements.created_at', 'DESC')
+            ->paginate(3);
         return view('user.home', compact('achievements'));
     }
 
     public function myAchievement()
     {
-        $achievements = Achievement::where('nim', Auth::user()->nim)->get();
+        $achievements = Achievement::select('*')->join('users', 'users.nim', '=', 'achievements.nim')
+            ->where('achievements.nim', Auth::user()->nim)->paginate(3);
         return view('user.my-achievement.my-achievement', compact('achievements'));
 
     }

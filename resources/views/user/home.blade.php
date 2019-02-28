@@ -28,22 +28,33 @@
             <h4 class="card-title">Newest Achievements</h4>
         </div>
         @foreach($achievements as $achievement)
-            <div class="col-lg-4 col-md-6">
-                <div class="card">
-                    <img class="card-img-top" src="{{ asset('images/' . $achievement->certificate) }}" alt="Card image cap" height="300">
-                    <div class="card-body">
-                        <h4 class="card-title">{{ $achievement->place_of_competition }}</h4>
-                        <p class="card-text">{{ $achievement->nim }}</p>
-                        <p class="card-text">{{ $achievement->achievement }}</p>
-                        <p class="card-text">{{ $achievement->prize }}</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
-                    </div>
-                    <div class="card-footer text-muted text-center">
-                        Uploaded at
-                        <br>
-                        <small>{{ \Carbon\Carbon::parse($achievement->created_at)->format('D, d M Y')}}</small>
-                    </div>
-                </div>
+            <div class="col-md-4">
+                <ul class="list-unstyled">
+                    <li class="media">
+                        <img class="d-flex mr-3" src="{{ asset('images/' . $achievement->certificate) }}" width="60"
+                             alt="Achievements">
+                        <div class="media-body">
+                            <h6 class="mt-0 mb-0">{{ $achievement->name }}</h6>
+                            <p class="mt-0 mb-0">
+                                <small>{{ $achievement->team_name }}</small>
+                            </p>
+                            <p class="mt-0 mb-0">
+                                <small>{{ $achievement->competition }}</small>
+                            </p>
+                            <p class="mt-0 mb-0">
+                                <small>{{ $achievement->place_of_competition }}</small>
+                            </p>
+                            <p class="mt-0 mb-0">
+                                <small>{{ $achievement->achievement }}</small>
+                            </p>
+                            <p class="mt-0 mb-0">
+                                <small>{{ $achievement->prize }}</small>
+                            </p>
+                            <hr>
+                            <small class="text-muted">{{ $achievement->created_at->format('l, d F Y') }}</small>
+                        </div>
+                    </li>
+                </ul>
             </div>
         @endforeach
         <div class="col-md-12">

@@ -35,7 +35,7 @@
         @foreach($achievements as $achievement)
             <div class="col-lg-4 col-md-6">
                 <div class="card">
-                    <img class="card-img-top" src="{{ asset('images/' . $achievement->certificate) }}" alt="Card image cap" height="300">
+                    {{--<img class="card-img-top" src="{{ asset('images/' . $achievement->certificate) }}" alt="Card image cap" height="300">--}}
                     <div class="card-body">
                         <h4 class="card-title">{{ $achievement->place_of_competition }}</h4>
                         <p class="card-text">{{ $achievement->nim }}</p>
