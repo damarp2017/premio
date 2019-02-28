@@ -62,7 +62,7 @@
                         <span class="hide-menu">Achievement </span>
                     </a>
                     <ul aria-expanded="false" class="collapse">
-                        <li><a href="#">Achievement</a></li>
+                        <li><a href="{{ route('admin.achievement') }}">Achievement</a></li>
                     </ul>
                 </li>
             </ul>

@@ -35,10 +35,42 @@ class HomeController extends Controller
 
     public function myAchievement()
     {
-        $achievements = Achievement::select('*')->join('users', 'users.nim', '=', 'achievements.nim')
+        $achievements = Achievement::select('*', 'achievements.id as achievement_id')->join('users', 'users.nim', '=', 'achievements.nim')
             ->where('achievements.nim', Auth::user()->nim)->paginate(3);
         return view('user.my-achievement.my-achievement', compact('achievements'));
+    }
 
+    public function editAchievement($id)
+    {
+        $achievement = Achievement::find($id);
+        return view('user.my-achievement.update-my-achievement', compact('achievement'));
+    }
+
+    public function updateAchievement(Request $request, $id)
+    {
+        $this->validate($request, [
+            'team_name' => 'required',
+            'achievement' => 'required',
+            'prize' => 'required|numeric',
+            'competition' => 'required',
+            'place_of_competition' => 'required',
+            'date_of_competition' => 'required',
+            'image' => ''
+        ]);
+        $achievement = Achievement::find($id);
+        $achievement->team_name = $request->team_name;
+        $achievement->achievement = $request->achievement;
+        $achievement->prize = $request->prize;
+        $achievement->competition = $request->competition;
+        $achievement->place_of_competition = $request->place_of_competition;
+        $achievement->date_of_competition = $request->date_of_competition;
+        if ($request->image != null) {
+            Storage::delete($achievement->certificate);
+            $image = $request->file('image')->store('achievements');
+            $achievement->certificate = $image;
+        }
+        $achievement->update();
+        return redirect()->route('my-achievement')->with(['success' => 'Chosen achievement updated successfully']);
     }
 
     public function myProfile()
@@ -105,5 +137,12 @@ class HomeController extends Controller
         $achievement->certificate = $image;
         $achievement->save();
         return redirect()->route('my-achievement')->with(['success' => 'New achievement uploaded successfully']);
+    }
+
+    public function destroyAchievement($id)
+    {
+        $achievement = Achievement::find($id);
+        $achievement->delete();
+        return redirect()->route('my-achievement')->with(['success' => 'Chosen achievement deleted successfully']);
     }
 }

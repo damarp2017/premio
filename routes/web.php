@@ -20,6 +20,9 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/my-achievement', 'HomeController@myAchievement')->name('my-achievement');
 Route::post('/my-achievement', 'HomeController@storeMyAchievement')->name('store-my-achievement');
+Route::get('/my-achievement/{achievement}', 'HomeController@editAchievement')->name('edit-achievement');
+Route::patch('/my-achievement/{achievement}', 'HomeController@updateAchievement')->name('update-achievement');
+Route::delete('/my-achievement/{achievement}', 'HomeController@destroyAchievement')->name('destroy-achievement');
 Route::get('/my-profile', 'HomeController@myProfile')->name('my-profile');
 Route::patch('/my-profile/{student}', 'HomeController@updateMyProfile')->name('update-my-profile');
 Route::get('/users/logout', 'Auth\LoginController@userLogout')->name('users.logout');
@@ -53,10 +56,15 @@ Route::prefix('/admin')->group(function () {
     Route::get('/create-user-student', 'AdminController@createStudent')->name('admin.create-user-student');
     Route::post('/store-user-student', 'AdminController@storeStudent')->name('admin.store-user-student');
     Route::delete('/user-student/{student}', 'AdminController@destroyStudent')->name('admin.destroy-user-student');
+
     // Student menu routes
     Route::get('/student', 'AdminController@viewStudent')->name('admin.student');
     Route::get('/student/{student}', 'AdminController@viewStudentDetail')->name('admin.student-detail');
     Route::patch('/student/{student}', 'AdminController@updateStudent')->name('admin.update-student');
+
+    // Achievement menu routes
+    Route::get('/achievement', 'AdminController@viewAchievement')->name('admin.achievement');
+
 
 
     // Password reset routes

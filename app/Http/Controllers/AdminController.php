@@ -56,8 +56,11 @@ class AdminController extends Controller
             'admin' => count(Admin::all()),
             'lecturer' => count(Lecturer::all()),
             'student' => count(User::all()),
+            'achievement' => count(Achievement::all()),
         ];
-        $achievements = Achievement::orderBy('created_at', 'DESC')->paginate(3);
+        $achievements = Achievement::select('*')->join('users', 'users.nim', '=', 'achievements.nim')
+            ->orderBy('achievements.created_at', 'DESC')
+            ->paginate(3);
         return view('admin.home', compact('total', 'achievements'));
     }
 
@@ -88,7 +91,19 @@ class AdminController extends Controller
     public function viewStudentDetail($id)
     {
         $student = User::find($id);
-        return view('admin.student.detail-student', compact('student'));
+        $achievements = Achievement::select('*')->join('users', 'users.nim', '=', 'achievements.nim')
+            ->where('users.nim', $student->nim)
+            ->orderBy('achievements.created_at', 'DESC')->get();
+        return view('admin.student.detail-student', compact('student', 'achievements'));
+    }
+
+    public function viewAchievement()
+    {
+        $count = count(Achievement::all());
+        $achievements = Achievement::select('*')->join('users', 'users.nim', '=', 'achievements.nim')
+            ->orderBy('achievements.created_at', 'DESC')
+            ->paginate(20);
+        return view('admin.achievement.achievement', compact('achievements', 'count'));
     }
 
     /**
