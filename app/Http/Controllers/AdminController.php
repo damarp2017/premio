@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Achievement;
 use App\Admin;
+use App\Grade;
 use App\Lecturer;
 use App\User;
 use Illuminate\Http\Request;
@@ -78,13 +79,13 @@ class AdminController extends Controller
 
     public function viewUserStudent()
     {
-        $students = User::all();
+        $students = User::orderBy('created_at', 'DESC')->get();
         return view('admin.users.student.student', compact('students'));
     }
 
     public function viewStudent()
     {
-        $students = User::all();
+        $students = User::orderBy('created_at', 'DESC')->get();
         return view('admin.student.student', compact('students'));
     }
 
@@ -106,6 +107,11 @@ class AdminController extends Controller
         return view('admin.achievement.achievement', compact('achievements', 'count'));
     }
 
+    public function viewGrade() {
+        $grades = Grade::all();
+        return view('admin.grade.grade', compact('grades'));
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -124,6 +130,10 @@ class AdminController extends Controller
     public function createStudent()
     {
         return view('admin.users.student.create-student');
+    }
+
+    public function createGrade() {
+        return view('admin.grade.create-grade');
     }
 
     /**
@@ -191,6 +201,16 @@ class AdminController extends Controller
         $student->password = bcrypt($student->nim);
         $student->save();
         return redirect()->route('admin.user-student')->with(['success' => 'New student created successfully']);
+    }
+
+    public function storeGrade(Request $request) {
+        $this->validate($request, [
+           'grade_name' => 'required|unique:grades',
+        ]);
+        $grade = new Grade();
+        $grade->grade_name = strtoupper($request->grade_name);
+        $grade->save();
+        return redirect()->route('admin.grade');
     }
 
     /**

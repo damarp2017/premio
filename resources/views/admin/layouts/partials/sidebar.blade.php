@@ -38,6 +38,16 @@
                 </li>
                 <li>
                     <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false">
+                        <i class="mdi mdi-database"></i>
+                        <span class="hide-menu">Grade </span>
+                    </a>
+                    <ul aria-expanded="false" class="collapse">
+                        <li><a href="{{ route('admin.grade') }}">Grade</a></li>
+                        <li><a href="#">Classification</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false">
                         <i class="mdi mdi-account-multiple-outline"></i>
                         <span class="hide-menu">Users </span>
                     </a>

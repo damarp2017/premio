@@ -35,6 +35,11 @@ Route::prefix('/admin')->group(function () {
     Route::get('/my-profile', 'AdminController@myprofile')->name('admin.my-profile');
     Route::patch('/my-profile/{admin}', 'AdminController@updateMyProfile')->name('admin.update-my-profile');
 
+    // Grade-admin menu routes
+    Route::get('/grade', 'AdminController@viewGrade')->name('admin.grade');
+    Route::get('/create-grade', 'AdminController@createGrade')->name('admin.create-grade');
+    Route::post('/store-grade', 'AdminController@storeGrade')->name('admin.store-grade');
+
     // User-admin menu routes
     Route::get('/user-admin', 'AdminController@viewUserAdmin')->name('admin.user-admin');
     Route::get('/create-user-admin', 'AdminController@create')->name('admin.create-user-admin');
