@@ -157,7 +157,7 @@ class AdminController extends Controller
         $image = $request->file('image')->store('admins');
         $admin->image = $image;
         $admin->save();
-        return redirect()->route('admin.user-admin')->with(['success' => 'New administrator create successfully']);
+        return redirect()->route('admin.user-admin')->with(['success' => 'New administrator created successfully']);
     }
 
     public function storeLecturer(Request $request)
@@ -210,7 +210,7 @@ class AdminController extends Controller
         $grade = new Grade();
         $grade->grade_name = strtoupper($request->grade_name);
         $grade->save();
-        return redirect()->route('admin.grade');
+        return redirect()->route('admin.grade')->with(['success' => 'New Grade created successfully']);
     }
 
     /**
@@ -240,6 +240,11 @@ class AdminController extends Controller
     {
         $lecturer = Lecturer::find($id);
         return view('admin.users.lecturer.update-lecturer', compact('lecturer'));
+    }
+
+    public function editGrade($id) {
+        $grade = Grade::find($id);
+        return view('admin.grade.update-grade', compact('grade'));
     }
 
     /**
@@ -328,6 +333,16 @@ class AdminController extends Controller
         $student->phone = $request->phone;
         $student->update();
         return redirect()->route('admin.student-detail', $id)->with(['success' => 'Chosen student updated successfully']);
+    }
+
+    public function updateGrade(Request $request, $id) {
+        $this->validate($request, [
+           'grade_name' => 'required|unique:grades',
+        ]);
+        $grade =  Grade::where('id', $id)->first();
+        $grade->grade_name = $request->grade_name;
+        $grade->update();
+        return redirect()->route('admin.grade')->with(['success' => 'Chosen grade updated successfully']);
     }
 
     /**

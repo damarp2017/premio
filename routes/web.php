@@ -39,6 +39,8 @@ Route::prefix('/admin')->group(function () {
     Route::get('/grade', 'AdminController@viewGrade')->name('admin.grade');
     Route::get('/create-grade', 'AdminController@createGrade')->name('admin.create-grade');
     Route::post('/store-grade', 'AdminController@storeGrade')->name('admin.store-grade');
+    Route::get('/grade/{id}/edit', 'AdminController@editGrade')->name('admin.edit-grade');
+    Route::patch('/grade/{id}', 'AdminController@updateGrade')->name('admin.update-grade');
 
     // User-admin menu routes
     Route::get('/user-admin', 'AdminController@viewUserAdmin')->name('admin.user-admin');

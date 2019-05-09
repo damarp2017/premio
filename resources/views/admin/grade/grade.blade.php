@@ -29,6 +29,21 @@
             </div>
         </div>
     </div>
+
+    @if($message = Session::get('success'))
+        <div class="row">
+            <div class="col-md-12">
+                <div class="alert alert-success">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h3 class="text-success"><i class="fa fa-check-circle"></i> Success</h3>
+                    {{ $message }}
+                </div>
+            </div>
+        </div>
+    @endif
+
     <div class="row">
         <div class="col-12">
             <div class="card">
@@ -52,7 +67,7 @@
                                     <td>{{ $grade->grade_name }}</td>
                                     <td>
                                         <center>
-                                            <a href="#"
+                                            <a href="{{ route('admin.edit-grade', $grade->id) }}"
                                                class="btn btn-outline-warning btn-xs">
                                                 <i class="ti-pencil"></i>
                                                 &ensp;Update
